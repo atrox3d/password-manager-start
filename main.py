@@ -20,6 +20,7 @@ website_label = tkinter.Label(text="Website:")
 website_label.grid(row=1, column=0)
 website_entry = tkinter.Entry(width=35)
 website_entry.grid(row=1, column=1, columnspan=2, sticky="EW")
+website_entry.focus()
 
 # account
 account_label = tkinter.Label(text="Email/username:")
