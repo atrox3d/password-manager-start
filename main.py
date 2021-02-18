@@ -27,6 +27,7 @@ account_label = tkinter.Label(text="Email/username:")
 account_label.grid(row=2, column=0)
 account_entry = tkinter.Entry(width=35)
 account_entry.grid(row=2, column=1, columnspan=2, sticky="EW")
+account_entry.insert(0, "insert@email.here")
 
 # password
 password_label = tkinter.Label(text="Password:")
