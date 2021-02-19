@@ -6,10 +6,18 @@ import mypass
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+def validate(website, account, password):
+    return len(website) != 0 and len(account) != 0 and len(password) !=0
+
+
 def save():
     website = website_entry.get()
     account = account_entry.get()
     password = password_entry.get()
+
+    if not validate(website, account, password):
+        tkinter.messagebox.showerror(title="ERROR", message="Please don't leave any fields empty!")
+        return
 
     confirm = tkinter.messagebox.askokcancel(title=website, message=f"details entered:\n"
                                                                     f"account: {account}\n"
