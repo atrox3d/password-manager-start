@@ -23,13 +23,13 @@ def generate_password():
 
     password_list = []
 
-    password_letters = [random.choice(LETTERS) for char in range(nr_letters)]
+    password_letters = [random.choice(LETTERS) for _ in range(nr_letters)]
     password_list.extend(password_letters)
 
-    password_symbols = [random.choice(SYMBOLS) for char in range(nr_symbols)]
+    password_symbols = [random.choice(SYMBOLS) for _ in range(nr_symbols)]
     password_list.extend(password_symbols)
 
-    password_numbers = [random.choice(NUMBERS) for char in range(nr_numbers)]
+    password_numbers = [random.choice(NUMBERS) for _ in range(nr_numbers)]
     password_list.extend(password_numbers)
 
     random.shuffle(password_list)
