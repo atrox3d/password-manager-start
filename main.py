@@ -17,21 +17,20 @@ def save():
 
     if not validate(website, account, password):
         tkinter.messagebox.showerror(title="ERROR", message="Please don't leave any fields empty!")
-        return
-
-    confirm = tkinter.messagebox.askokcancel(title=website, message=f"details entered:\n"
-                                                                    f"account: {account}\n"
-                                                                    f"password: {password}\n"
-                                                                    "Confirm save?"
-                                             )
-    if confirm:
-        # at the moment mypass.save() returns True
-        if mypass.save(website, account, password):
-            tkinter.messagebox.showinfo(title=website, message="account saved correctly")
-            website_entry.delete(0, tkinter.END)
-            password_entry.delete(0, tkinter.END)
     else:
-        tkinter.messagebox.showwarning(title=website, message="account not saved")
+        confirm = tkinter.messagebox.askokcancel(title=website, message=f"details entered:\n"
+                                                                        f"account: {account}\n"
+                                                                        f"password: {password}\n"
+                                                                        "Confirm save?"
+                                                 )
+        if confirm:
+            # at the moment mypass.save() returns True
+            if mypass.save(website, account, password):
+                tkinter.messagebox.showinfo(title=website, message="account saved correctly")
+                website_entry.delete(0, tkinter.END)
+                password_entry.delete(0, tkinter.END)
+        else:
+            tkinter.messagebox.showwarning(title=website, message="account not saved")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
