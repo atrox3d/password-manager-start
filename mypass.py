@@ -18,7 +18,6 @@ SYMBOLS = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
 def save_text(website, account, password):
     with open(PASSWORD_TXTFILE, APPEND) as file:
-        print(f"saving: {website} | {account} | {password} on {PASSWORD_TXTFILE}")
         file.write(f"{website} | {account} | {password}\n")
     return True
 
@@ -36,8 +35,8 @@ def save_json(website, account, password):
         with open(PASSWORD_JSONFILE, READ) as file:     # try to open file for reading
             data = json.load(file)                      # if succesful, load data from json file
     except FileNotFoundError:
-        with open(PASSWORD_JSONFILE, WRITE):            # create file if it doesnt exist
-            data = {}                                   # create empty dictionary
+        with open(PASSWORD_JSONFILE, WRITE):            # if unsuccesful, create file if it doesnt exist
+            data = {}                                   # and create empty dictionary
     finally:
         data.update(new_data)                           # update the dictionary with the new data
         with open(PASSWORD_JSONFILE, WRITE) as file:    # open file to write json dictionary
