@@ -24,18 +24,12 @@ def generate_password():
     password_list = []
 
     password_letters = [random.choice(LETTERS) for _ in range(nr_letters)]
-    password_list.extend(password_letters)
-
     password_symbols = [random.choice(SYMBOLS) for _ in range(nr_symbols)]
-    password_list.extend(password_symbols)
-
     password_numbers = [random.choice(NUMBERS) for _ in range(nr_numbers)]
-    password_list.extend(password_numbers)
 
+    password_list = password_letters + password_symbols + password_numbers
     random.shuffle(password_list)
 
-    password = ""
-    for char in password_list:
-        password += char
+    password = "".join(password_list)
 
     return password
