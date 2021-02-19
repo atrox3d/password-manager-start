@@ -1,8 +1,13 @@
 import random
 import pyperclip
+import json
 
-PASSWORD_FILE = "mypass.txt"
+PASSWORD_TXTFILE = "mypass.txt"
+PASSWORD_JSONFILE = "mypass.json"
+
 APPEND = 'a'
+WRITE = 'w'
+
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
            'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
            'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -10,11 +15,27 @@ NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 SYMBOLS = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
 
-def save(website, email, password):
-    with open(PASSWORD_FILE, APPEND) as file:
-        print(f"saving: {website} | {email} | {password} on {PASSWORD_FILE}")
-        file.write(f"{website} | {email} | {password}\n")
+def save_text(website, account, password):
+    with open(PASSWORD_TXTFILE, APPEND) as file:
+        print(f"saving: {website} | {account} | {password} on {PASSWORD_TXTFILE}")
+        file.write(f"{website} | {account} | {password}\n")
     return True
+
+
+def save_json(website, account, password):
+    json_dict = {
+        website: {
+            "account":  account,
+            "password": password,
+        }
+    }
+
+    with open(PASSWORD_JSONFILE, WRITE) as json_file:
+        json.dump(json_dict, json_file, indent=4)
+    return True
+
+
+save = save_json
 
 
 def generate_password():
