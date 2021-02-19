@@ -4,10 +4,15 @@ import mypass
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+def generate_password():
+    password = mypass.generate_password()
+    password_entry.delete(0, tkinter.END)
+    password_entry.insert(0, password)
+
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def validate(website, account, password):
-    return len(website) != 0 and len(account) != 0 and len(password) !=0
+    return len(website) != 0 and len(account) != 0 and len(password) != 0
 
 
 def save():
@@ -63,7 +68,7 @@ password_label = tkinter.Label(text="Password:")
 password_label.grid(row=3, column=0)
 password_entry = tkinter.Entry(width=21)
 password_entry.grid(row=3, column=1, sticky="EW")
-password_button = tkinter.Button(text="Generate Password")
+password_button = tkinter.Button(text="Generate Password", command=generate_password)
 password_button.grid(row=3, column=2, sticky="EW")
 
 # add
