@@ -7,6 +7,7 @@ PASSWORD_JSONFILE = "mypass.json"
 
 APPEND = 'a'
 WRITE = 'w'
+READ = 'r'
 
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
            'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -23,14 +24,22 @@ def save_text(website, account, password):
 
 
 def save_json(website, account, password):
-    json_dict = {
+    # format the new data
+    new_json_dict = {
         website: {
             "account":  account,
             "password": password,
         }
     }
 
+    with open(PASSWORD_JSONFILE, READ) as json_file:
+        # load data from json file
+        json_dict = json.load(json_file)
+        # update the dictionary with the new data
+        json_dict.update(new_json_dict)
+
     with open(PASSWORD_JSONFILE, WRITE) as json_file:
+        # save all of the data
         json.dump(json_dict, json_file, indent=4)
     return True
 
