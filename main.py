@@ -7,7 +7,12 @@ def search():
     website = website_entry.get()
     try:
         account, password = mypass.search(website)
-        if account is not None:
+    except FileNotFoundError:
+        tkinter.messagebox.showinfo(title=website, message=f"no data file found")
+    else:
+        if account is None:
+            tkinter.messagebox.showinfo(title=website, message=f"no details for {website}")
+        else:
             # update fields
             account_entry.delete(0, tkinter.END)
             account_entry.insert(0, account)
@@ -15,10 +20,6 @@ def search():
             password_entry.insert(0, password)
 
             tkinter.messagebox.showinfo(title=website, message=f"{account}\n{password}")
-        else:
-            tkinter.messagebox.showinfo(title=website, message=f"no details for {website}")
-    except FileNotFoundError:
-        tkinter.messagebox.showinfo(title=website, message=f"no data file found")
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -66,11 +67,10 @@ canvas.grid(row=0, column=1)
 # website
 website_label = tkinter.Label(text="Website:")
 website_label.grid(row=1, column=0)
-website_entry = tkinter.Entry(width=35)
-website_entry.grid(row=1, column=1, columnspan=2, sticky="EW")
+website_entry = tkinter.Entry(width=21)
+website_entry.grid(row=1, column=1, sticky="EW")
 website_entry.focus()
-
-# search button
+# website search button
 search_button = tkinter.Button(text="Search", width=30, command=search)
 search_button.grid(row=1, column=2, sticky="EW")
 

@@ -73,8 +73,7 @@ def search(website):
                                                     # if unsuccesful, raise FileNotFoundError
         for site in data:
             if website.lower() == site.lower():
-                details = data[site]
-                return details["account"], details["password"]
+                return data[site]["account"], data[site]["password"]
     return None, None
 
 
