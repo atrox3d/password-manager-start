@@ -25,23 +25,27 @@ def save_text(website, account, password):
 
 def save_json(website, account, password):
     # format the new data
-    new_json_dict = {
+    new_data = {
         website: {
             "account":  account,
             "password": password,
         }
     }
 
-    with open(PASSWORD_JSONFILE, READ) as json_file:
-        # load data from json file
-        json_dict = json.load(json_file)
+    try:
+        with open(PASSWORD_JSONFILE, READ) as json_file:
+            # load data from json file
+            data = json.load(json_file)
+    except FileNotFoundError:
+        with open(PASSWORD_JSONFILE, WRITE):
+            data = {}
+    finally:
         # update the dictionary with the new data
-        json_dict.update(new_json_dict)
-
-    with open(PASSWORD_JSONFILE, WRITE) as json_file:
-        # save all of the data
-        json.dump(json_dict, json_file, indent=4)
-    return True
+        data.update(new_data)
+        with open(PASSWORD_JSONFILE, WRITE) as json_file:
+            # save all of the data
+            json.dump(data, json_file, indent=4)
+        return True
 
 
 save = save_json
