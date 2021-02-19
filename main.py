@@ -1,8 +1,20 @@
 import tkinter
+import mypass
+
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+def save():
+    website = website_entry.get()
+    account = account_entry.get()
+    password = password_entry.get()
+
+    mypass.save(website, account, password)
+
+    website_entry.delete(0, tkinter.END)
+    password_entry.delete(0, tkinter.END)
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = tkinter.Tk()
@@ -38,9 +50,8 @@ password_button = tkinter.Button(text="Generate Password")
 password_button.grid(row=3, column=2, sticky="EW")
 
 # add
-add_button = tkinter.Button(text="add", width=30)
+add_button = tkinter.Button(text="add", width=30, command=save)
 add_button.grid(row=4, column=1, columnspan=2, sticky="EW")
-
 
 ########################################################################
 #
