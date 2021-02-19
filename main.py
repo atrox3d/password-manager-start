@@ -3,6 +3,24 @@ from tkinter import messagebox
 import mypass
 
 
+def search():
+    website = website_entry.get()
+    try:
+        account, password = mypass.search(website)
+        if account is not None:
+            # update fields
+            account_entry.delete(0, tkinter.END)
+            account_entry.insert(0, account)
+            password_entry.delete(0, tkinter.END)
+            password_entry.insert(0, password)
+
+            tkinter.messagebox.showinfo(title=website, message=f"{account}\n{password}")
+        else:
+            tkinter.messagebox.showinfo(title=website, message=f"no details for {website}")
+    except FileNotFoundError:
+        tkinter.messagebox.showinfo(title=website, message=f"no data file found")
+
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
     password = mypass.generate_password()
@@ -51,6 +69,10 @@ website_label.grid(row=1, column=0)
 website_entry = tkinter.Entry(width=35)
 website_entry.grid(row=1, column=1, columnspan=2, sticky="EW")
 website_entry.focus()
+
+# search button
+search_button = tkinter.Button(text="Search", width=30, command=search)
+search_button.grid(row=1, column=2, sticky="EW")
 
 # account
 account_label = tkinter.Label(text="Email/username:")

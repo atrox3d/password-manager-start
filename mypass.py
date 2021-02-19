@@ -67,5 +67,16 @@ def generate_password():
     return password
 
 
+def search(website):
+    with open(PASSWORD_JSONFILE, READ) as file:     # try to open file for reading
+        data = json.load(file)                      # if succesful, load data from json file
+                                                    # if unsuccesful, raise FileNotFoundError
+        for site in data:
+            if website.lower() == site.lower():
+                details = data[site]
+                return details["account"], details["password"]
+    return None, None
+
+
 def clipboard_copy(password):
     pyperclip.copy(password)
