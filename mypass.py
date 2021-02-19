@@ -1,4 +1,5 @@
 import random
+import pyperclip
 
 PASSWORD_FILE = "mypass.txt"
 APPEND = 'a'
@@ -29,5 +30,6 @@ def generate_password():
     random.shuffle(password_list)
 
     password = "".join(password_list)
+    pyperclip.copy(password)
 
     return password
