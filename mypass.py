@@ -33,21 +33,21 @@ def save_json(website, account, password):
     }
 
     try:
-        with open(PASSWORD_JSONFILE, READ) as json_file:
-            # load data from json file
-            data = json.load(json_file)
+        with open(PASSWORD_JSONFILE, READ) as file:     # try to open file for reading
+            data = json.load(file)                      # if succesful, load data from json file
     except FileNotFoundError:
-        with open(PASSWORD_JSONFILE, WRITE):
-            data = {}
+        with open(PASSWORD_JSONFILE, WRITE):            # create file if it doesnt exist
+            data = {}                                   # create empty dictionary
     finally:
-        # update the dictionary with the new data
-        data.update(new_data)
-        with open(PASSWORD_JSONFILE, WRITE) as json_file:
-            # save all of the data
-            json.dump(data, json_file, indent=4)
+        data.update(new_data)                           # update the dictionary with the new data
+        with open(PASSWORD_JSONFILE, WRITE) as file:    # open file to write json dictionary
+            json.dump(data, file, indent=4)             # save all of the data
         return True
 
 
+#
+# function pointer to current save method
+#
 save = save_json
 
 
