@@ -6,8 +6,12 @@ import mypass
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
     password = mypass.generate_password()
+
     password_entry.delete(0, tkinter.END)
     password_entry.insert(0, password)
+
+    mypass.clipboard_copy(password)
+    tkinter.messagebox.showinfo(title="clipboard", message="password copied to clipboard")
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #

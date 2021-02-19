@@ -30,6 +30,9 @@ def generate_password():
     random.shuffle(password_list)
 
     password = "".join(password_list)
-    pyperclip.copy(password)
 
     return password
+
+
+def clipboard_copy(password):
+    pyperclip.copy(password)
